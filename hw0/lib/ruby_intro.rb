@@ -70,6 +70,7 @@ end
 
 # Part 3
 
+
 class BookInStock
   
   def initialize(isbn, price)
@@ -104,3 +105,5 @@ class BookInStock
     "$%.2f" % @price
   end
 end
+
+

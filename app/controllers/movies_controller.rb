@@ -22,13 +22,13 @@ class MoviesController < ApplicationController
     
     @movies = Movie.where(rating: ratings)
     
-    session[:sort] = params[:sort] if params[:sort] != nil
-    sortby = params[:sort] || session[:sort]
-    params[:sort] = sortby
+    if params[:sort] == nil && session[:sort] != nil 
+      redirect_to controller: 'movies', action: 'index', sort: session[:sort]
+    end
     
-  	if sortby == "title" 
+  	if params[:sort] == "title" 
   		@movies = @movies.all.sort_by{|e| e[:title]}
-  	elsif sortby == "release_date" 
+  	elsif params[:sort] == "release_date" 
   		@movies = @movies.all.sort_by{|e| e[:release_date]}
   	end
   	

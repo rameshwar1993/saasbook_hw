@@ -12,22 +12,22 @@ class MoviesController < ApplicationController
 
   def index
     
-    @all_ratings = ['G','PG','PG-13','R','NC-17']
-    ratings = params[:ratings] != nil ? params[:ratings].keys : 
-              session[:ratings] != nil ? session[:ratings] : @all_ratings
-  
-    session[:ratings] = ratings
-    
-    @rating_checked = Hash[@all_ratings.map{|r| [r, ratings.include?(r)]}]
-    
-    @movies = Movie.where(rating: ratings)
-    
-    if params[:sort] == nil && session[:sort] != nil 
+    if (params[:ratings] == nil && session[:ratings] != nil) ||
+       (params[:sort] == nil && session[:sort] != nil)
       flash.keep
-      redirect_to movies_path(sort: session[:sort])
+      redirect_to movies_path(ratings: session[:ratings] || params[:ratings], sort: session[:sort] || params[:sort])
     end
     
     session[:sort] = params[:sort]
+    session[:ratings] = params[:ratings]
+    
+    @all_ratings = ['G','PG','PG-13','R','NC-17']
+    ratings = params[:ratings] != nil ? params[:ratings].keys : @all_ratings
+  
+    @rating_checked = Hash[@all_ratings.map{|r| [r, ratings.include?(r)]}]
+    
+    @movies = Movie.where(rating: ratings)
+
     
   	if params[:sort] == "title" 
   		@movies = @movies.all.sort_by{|e| e[:title]}

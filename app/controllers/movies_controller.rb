@@ -27,6 +27,8 @@ class MoviesController < ApplicationController
       redirect_to movies_path(sort: session[:sort])
     end
     
+    session[:sort] = params[:sort]
+    
   	if params[:sort] == "title" 
   		@movies = @movies.all.sort_by{|e| e[:title]}
   	elsif params[:sort] == "release_date" 

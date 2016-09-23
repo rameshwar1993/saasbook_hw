@@ -43,8 +43,12 @@ class HangpersonApp < Sinatra::Base
   post '/guess' do
     letter = params[:guess].to_s[0]
     ### YOUR CODE HERE ###
-    if(!@game.guess(letter))
-		  flash[:message]="You have already used that letter"
+    begin
+      if(!@game.guess(letter))
+  		  flash[:message]="You have already used that letter."
+      end 
+    rescue
+      flash[:message]="Invalid guess."
     end
     redirect '/show'
   end
@@ -84,6 +88,11 @@ class HangpersonApp < Sinatra::Base
   		redirect '/show'
     end
     erb :lose # You may change/remove this line
+  end
+  
+  def word_with_guesses(word, guesses)
+    @game = session[:game] || HangpersonGame.new('')
+    @game.word_with_guesses(word, guesses)
   end
   
 end

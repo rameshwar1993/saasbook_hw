@@ -86,4 +86,9 @@ class HangpersonApp < Sinatra::Base
     erb :lose # You may change/remove this line
   end
   
+  def word_with_guesses(word, guesses)
+    @game = session[:game] || HangpersonGame.new('')
+    @game.word_with_guesses(word, guesses)
+  end
+  
 end

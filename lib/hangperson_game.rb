@@ -10,6 +10,7 @@ class HangpersonGame
   # end
   
   def initialize(word)
+    #puts "Created a new game"
     @word = word
     @guesses = ''
     @wrong_guesses = ''

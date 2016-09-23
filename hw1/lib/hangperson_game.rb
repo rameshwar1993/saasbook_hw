@@ -10,6 +10,7 @@ class HangpersonGame
   # end
   
   def initialize(word)
+    #puts "Created a new game"
     @word = word
     @guesses = ''
     @wrong_guesses = ''
@@ -32,17 +33,21 @@ class HangpersonGame
     end
   end
   
-  def word_with_guesses
-    
-    wwg = @word;
-    
-    @word.downcase.split("").each do |i|
-      if not @guesses.downcase.include? i
-        wwg.sub!(i, "-")
-      end
-    end
-    
-    return wwg
+#  def word_with_guesses
+#    self.word_with_guesses(@word, @guesses)
+#  end
+  
+  def word_with_guesses(word=@word, guesses=@guesses)
+    word.gsub(/[^ #{guesses}]/, '-')
+#    wwg = @word;
+#    
+#    @word.downcase.split("").each do |i|
+#      if not @guesses.downcase.include? i
+#        wwg.sub!(i, "-")
+#      end
+#    end
+#    
+#    return wwg
   end
   
   def check_win_or_lose

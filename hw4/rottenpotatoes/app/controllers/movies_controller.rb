@@ -61,4 +61,16 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def similar
+    id = params[:id] # retrieve movie ID from URI route
+    movie = Movie.find(id) # look up movie by unique ID
+    
+    if movie.director == nil || movie.director == ''
+      flash[:notice] = "'#{movie.title}' has no director info"
+      redirect_to movies_path
+    end
+    
+    @movies = Movie.where("director = ?", movie.director).all
+  end
+
 end

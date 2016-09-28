@@ -33,5 +33,6 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  Movie.all.all? { |movie| page.body.include? movie.title }
+  rows = Movie.all.count + 1
+  expect(page.body).to have_css("table#movies tr", :count=>rows)
 end

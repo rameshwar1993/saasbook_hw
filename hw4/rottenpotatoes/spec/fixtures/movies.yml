@@ -1,0 +1,43 @@
+alien:
+    id: 1
+    title: "Alien"
+    rating: "R"
+    director: "Ridley Scott"
+    release_date:  "1979-05-25 00:00:00"
+    description: "scary alien movie"
+    
+aladdin:
+    id: 2
+    title: "Aladdin"
+    rating: "G"
+    director: "Ron Clements"
+    release_date:  "1992-11-25 00:00:00"
+    description: "disney animated movie"  
+    
+ferris:
+    id: 3
+    title: "Ferris Bueller's Day Off"
+    rating: "PG-13"
+    director: "John Hughes"
+    release_date:  "1986-06-11 00:00:00"
+    description: "Bueller?"  
+    
+bladerunner:
+    id: 4
+    title: "Blade Runner"
+    rating: "PG"
+    director: "Ridley Scott"
+    release_date:  "1982-06-25 00:00:00"
+    
+thx1138:
+    id: 5
+    title: "THX-1138"
+    rating: "R"
+    director: "George Lucas"
+    release_date:  "1971-03-11 00:00:00"
+    
+nakedlunch:
+    id: 6
+    title: "Naked Lunch"
+    rating: "R"
+    release_date:  "1991-12-27 00:00:00"

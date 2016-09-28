@@ -890,3 +890,4 @@ Migrating to AddDirectorToMovie (20160928152939)
   [1m[36mMovie Load (0.3ms)[0m  [1mSELECT "movies".* FROM "movies" WHERE (title = 'Aladdin')[0m
   [1m[35mMovie Load (0.5ms)[0m  SELECT "movies".* FROM "movies" WHERE (title = 'Aladdin')
   [1m[36mMovie Load (0.5ms)[0m  [1mSELECT  "movies".* FROM "movies" WHERE (title = 'Aladdin')  ORDER BY "movies"."id" ASC LIMIT 1[0m
+  [1m[35mMovie Load (4.4ms)[0m  SELECT "movies".* FROM "movies"

@@ -20,11 +20,15 @@ class OracleOfBacon
   validate :from_does_not_equal_to
 
   def from_does_not_equal_to
-    # YOUR CODE HERE
+    if @from == @to
+      errors.add(:to, "can't be equal to From")
+    end
   end
 
   def initialize(api_key='')
-    # your code here
+    @api_key = api_key
+    @to = 'Kevin Bacon'
+    @from = 'Kevin Bacon'
   end
 
   def find_connections
@@ -37,13 +41,20 @@ class OracleOfBacon
       # convert all of these into a generic OracleOfBacon::NetworkError,
       #  but keep the original error message
       # your code here
+      error = OracleOfBacon::NetworkError.new(e.message)
+      raise error
     end
     # your code here: create the OracleOfBacon::Response object
+    Response.new(xml)
   end
 
   def make_uri_from_arguments
     # your code here: set the @uri attribute to properly-escaped URI
     #   constructed from the @from, @to, @api_key arguments
+    @uri = "http://oracleofbacon.org/cgi-bin/xml?" +
+            "p=#{@api_key}&" +
+            "a=#{CGI.escape(@from)}&" +
+            "b=#{CGI.escape(@to)}"
   end
       
   class Response
@@ -61,7 +72,17 @@ class OracleOfBacon
         parse_error_response
       # your code here: 'elsif' clauses to handle other responses
       # for responses not matching the 3 basic types, the Response
-      # object should have type 'unknown' and data 'unknown response'         
+      # object should have type 'unknown' and data 'unknown response'       
+      elsif ! @doc.xpath('/spellcheck').empty?
+        @type = :spellcheck
+        @data = @doc.xpath('//match').map {|node| node.text}
+      elsif ! @doc.xpath('/link').empty?
+        @type = :graph
+        @data = @doc.at_css('link').children.select {|node| node.element?}.map {|node| node.text}
+        #puts @data
+      else
+        @type = :unknown
+        @data = 'unknown'
       end
     end
     def parse_error_response

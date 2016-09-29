@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
+<<<<<<< HEAD
 gem 'sinatra', '>= 1.4'
 gem 'sinatra-flash', '0.3.0'
 
@@ -8,6 +9,11 @@ group :development, :test do
   gem 'cucumber', '2.0.0'
   gem 'cucumber-sinatra', '0.5.0'
   gem 'capybara', '2.4.4'
+=======
+gem 'nokogiri'
+gem 'byebug'
+gem 'activemodel', '4.2.6'
+>>>>>>> e218e4057beb6d3b942e10b4838b8d736383bd81
 
   gem 'rspec', '3.3.0'
   gem 'rspec-autotest', '1.0.0'

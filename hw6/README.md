@@ -15,3 +15,6 @@ Assignment Structure:
 4. Write a bugfix that passes the cucumber stories you created in step 3.
 
 Next: [Getting Set Up](getting_set_up.md)
+
+Login: admin
+Password: Ad0msCa

@@ -187,7 +187,7 @@ class Admin::ContentController < Admin::BaseController
       
       @article.state = "draft" if @article.draft
 
-      if params[:merge] && params[:merge_with]
+      if params[:merge_with] && current_user.admin?
         merge
       end
     

@@ -75,9 +75,14 @@ class Article < Content
   
     other = Article.find(id)
     
-    self.body += ''
-    self.body += other.body
+    self.body += ' '
+    self.body += other.body.to_s
+    self.comments += other.comments
+    #other.comments = nil
+    #other.save()
+    self.save!()
     
+    Article.destroy(id)
   end
 
   def set_permalink

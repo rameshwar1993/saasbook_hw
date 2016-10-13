@@ -154,8 +154,8 @@
     <h4><%= _("Merge Articles") %></h4>
     <p class='help-block'>Content from the target article will be merged into this one...</p>
     Article ID <%= text_field_tag 'merge_with', "", {:class => 'span4'} %>
-    <input id='merge' type="submit" value="Merge" name="merge" class='btn info' formaction="/admin/content/merge"/>
-    <input id='my_id' type="hidden" name="my_id" value="<%= @article.id %>" />
+    <input id='merge' type="submit" value="Merge" name="merge" class='btn info' /> <!-- formaction="/admin/content/merge" -->
+    <input id='article_id' type="hidden" name="article[id]" value="<%= @article.id %>" />
   </div>    
   </div>
   <% end %>

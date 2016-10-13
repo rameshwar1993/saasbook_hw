@@ -12,15 +12,18 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    puts "hit merge with id: " + params[:merge_with]
+    puts "hit merge with id: " + params[:merge_with] + " " + params[:article][:id]
     
-    id = params[:my_id]
+    id = params[:article][:id]
+    other_id = params[:merge_with]
     
-    @article = Article.find(id)
-    @article.merge_with(params[:merge_with])
-    @article.save()
+    if(id != other_id) 
+      @article = Article.find(id)
+      @article.merge_with(other_id)
+    end
     
-    redirect_to :action => 'edit', :id => id
+    
+
   end
 
   def index
@@ -36,10 +39,12 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def new
+    puts " ###### Hit new ######"
     new_or_edit
   end
 
   def edit
+    puts " ###### Hit edit ######"
     @article = Article.find(params[:id])
     unless @article.access_by? current_user
       redirect_to :action => 'index'
@@ -182,6 +187,10 @@ class Admin::ContentController < Admin::BaseController
       
       @article.state = "draft" if @article.draft
 
+      if params[:merge] && params[:merge_with]
+        merge
+      end
+    
       if @article.save
         destroy_the_draft unless @article.draft
         set_article_categories

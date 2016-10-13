@@ -11,6 +11,18 @@ class Admin::ContentController < Admin::BaseController
     render :inline => "<%= raw auto_complete_result @items, 'name' %>"
   end
 
+  def merge
+    puts "hit merge with id: " + params[:merge_with]
+    
+    id = params[:my_id]
+    
+    @article = Article.find(id)
+    @article.merge_with(params[:merge_with])
+    @article.save()
+    
+    redirect_to :action => 'edit', :id => id
+  end
+
   def index
     @search = params[:search] ? params[:search] : {}
     
@@ -145,7 +157,7 @@ class Admin::ContentController < Admin::BaseController
     @article = Article.get_or_build_article(id)
     @article.text_filter = current_user.text_filter if current_user.simple_editor?
     
-    @showmerge = current_user.profile_id == 1
+    @showmerge = current_user.profile_id == 1 && params[:id]
 
     @post_types = PostType.find(:all)
     if request.post?
@@ -242,4 +254,5 @@ class Admin::ContentController < Admin::BaseController
   def setup_resources
     @resources = Resource.by_created_at
   end
+  
 end
